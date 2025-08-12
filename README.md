@@ -11,6 +11,10 @@ A modern social platform where college students can share photos and rate each o
 - 👨‍💼 Admin dashboard for moderation
 - 📱 Responsive design for mobile and desktop
 - ⚡ Real-time notifications with Socket.IO
+- 🔐 Secure password reset functionality
+- 📧 Email verification and notifications
+- 🛡️ Rate limiting and security features
+- 🎯 Production-ready with proper validation
 
 ## Tech Stack
 
@@ -49,7 +53,13 @@ A modern social platform where college students can share photos and rate each o
 1. Go to your Cloudinary dashboard
 2. Note down your Cloud Name, API Key, and API Secret
 
-### Step 3: Deploy to Vercel
+### Step 3: Set up Email Service (SendGrid recommended)
+
+1. Create a SendGrid account at [SendGrid](https://sendgrid.com/)
+2. Create an API key with mail send permissions
+3. Verify your sender email address
+
+### Step 4: Deploy to Vercel
 
 1. **Fork or clone this repository**
 
@@ -68,6 +78,8 @@ A modern social platform where college students can share photos and rate each o
    CLOUDINARY_CLOUD_NAME=your-cloudinary-name
    CLOUDINARY_API_KEY=your-cloudinary-api-key
    CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+   SENDGRID_API_KEY=your-sendgrid-api-key
+   FROM_EMAIL=noreply@yourdomain.com
    FRONTEND_URL=https://your-app-name.vercel.app
    NODE_ENV=production
    ```
@@ -76,22 +88,43 @@ A modern social platform where college students can share photos and rate each o
    - Click "Deploy"
    - Vercel will automatically build and deploy your application
 
-### Step 4: Update CORS Settings
+### Step 5: Update CORS Settings
 
 After deployment, update the CORS settings in your Vercel environment variables:
 - Replace `your-app-name.vercel.app` with your actual Vercel domain
 
-### Default Admin Account
+## Production Features
 
-The application creates a default admin account on first run:
-- **Email**: admin@college.edu
-- **Password**: admin123
+### Security Features
+- Password strength validation
+- Account lockout after failed login attempts
+- Rate limiting on all endpoints
+- Email verification required
+- Secure password reset with time-limited tokens
+- Input validation and sanitization
 
-And a demo user account:
-- **Email**: user@college.edu
-- **Password**: demo123
+### Email Features
+- Welcome emails after registration
+- Email verification with beautiful templates
+- Password reset emails
+- Responsive HTML email templates
 
-**Important**: Change these credentials in production!
+### Image Management
+- Real Cloudinary integration for image uploads
+- Automatic image optimization and resizing
+- Secure image deletion
+- File size and type validation
+
+### Real-time Features
+- Live notifications for likes and reactions
+- Socket.IO integration for real-time updates
+- College-based room management
+
+### Admin Features
+- Comprehensive user management
+- Report handling system
+- Account reinstatement workflow
+- Detailed analytics and statistics
 
 ## Local Development
 

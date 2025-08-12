@@ -131,8 +131,17 @@ export const Login: React.FC = () => {
 
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500">
-            Demo accounts: admin@college.edu (admin123) / user@college.edu (demo123)
+            Need an account? <Link to="/register" className="text-blue-600 hover:text-blue-700">Sign up here</Link>
           </p>
+        </div>
+
+        <div className="mt-4 text-center">
+          <Link 
+            to="/forgot-password" 
+            className="text-sm text-blue-600 hover:text-blue-700 transition-colors duration-200"
+          >
+            Forgot your password?
+          </Link>
         </div>
       </motion.div>
     </div>
