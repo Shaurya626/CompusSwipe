@@ -20,8 +20,11 @@ const server = createServer(app);
 // Initialize Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: NODE_ENV === 'production' ? false : ['http://localhost:3000', 'http://localhost:5173'],
-    methods: ['GET', 'POST']
+    origin: NODE_ENV === 'production' 
+      ? [process.env.FRONTEND_URL, 'https://your-app-name.vercel.app']
+      : ['http://localhost:3000', 'http://localhost:5173'],
+    methods: ['GET', 'POST'],
+    credentials: true
   }
 });
 
@@ -30,10 +33,18 @@ connectDB();
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: NODE_ENV === 'production' ? false : ['http://localhost:3000', 'http://localhost:5173'],
-  credentials: true
-}));
+
+// CORS configuration for Vercel deployment
+const corsOptions = {
+  origin: NODE_ENV === 'production' 
+    ? [process.env.FRONTEND_URL, 'https://your-app-name.vercel.app']
+    : ['http://localhost:3000', 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 // Rate limiting
 const limiter = rateLimit({

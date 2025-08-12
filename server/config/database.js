@@ -3,8 +3,10 @@ import User from '../models/User.js';
 
 const connectDB = async () => {
   try {
-    // For WebContainer environment, use memory database
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/campus-swipe', {
+    // Use MongoDB Atlas for production, local for development
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/campus-swipe';
+    
+    const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
